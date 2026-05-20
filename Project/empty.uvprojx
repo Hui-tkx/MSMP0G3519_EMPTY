@@ -490,16 +490,6 @@
               <FilePath>..\BSP\uart\uart.h</FilePath>
             </File>
             <File>
-              <FileName>uart_test.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\empty\BSP\uart\uart_test.c</FilePath>
-            </File>
-            <File>
-              <FileName>uart_test.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\..\empty\BSP\uart\uart_test.h</FilePath>
-            </File>
-            <File>
               <FileName>buzzer.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\BSP\buzzer\buzzer.c</FilePath>
@@ -520,14 +510,14 @@
               <FilePath>..\BSP\w25q64\spi.h</FilePath>
             </File>
             <File>
-              <FileName>w24q64.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\BSP\w25q64\w24q64.c</FilePath>
-            </File>
-            <File>
               <FileName>w25q64.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\BSP\w25q64\w25q64.h</FilePath>
+            </File>
+            <File>
+              <FileName>w25q64.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\BSP\w25q64\w25q64.c</FilePath>
             </File>
             <File>
               <FileName>audio_task.c</FileName>
@@ -538,26 +528,6 @@
               <FileName>audio_task.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\BSP\audio_task\audio_task.h</FilePath>
-            </File>
-            <File>
-              <FileName>adc_test.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\BSP\adc\adc_test.c</FilePath>
-            </File>
-            <File>
-              <FileName>adc_test.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\BSP\adc\adc_test.h</FilePath>
-            </File>
-            <File>
-              <FileName>dac_test.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\BSP\dac\dac_test.c</FilePath>
-            </File>
-            <File>
-              <FileName>dac_test.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\BSP\dac\dac_test.h</FilePath>
             </File>
             <File>
               <FileName>ringbuffer.c</FileName>
@@ -600,14 +570,44 @@
               <FilePath>..\BSP\temperature\temperature.h</FilePath>
             </File>
             <File>
+              <FileName>adc_test.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\BSP\test\adc_test.c</FilePath>
+            </File>
+            <File>
+              <FileName>adc_test.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\BSP\test\adc_test.h</FilePath>
+            </File>
+            <File>
+              <FileName>dac_test.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\BSP\test\dac_test.c</FilePath>
+            </File>
+            <File>
+              <FileName>dac_test.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\BSP\test\dac_test.h</FilePath>
+            </File>
+            <File>
               <FileName>temperature_test.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\BSP\temperature\temperature_test.c</FilePath>
+              <FilePath>..\BSP\test\temperature_test.c</FilePath>
             </File>
             <File>
               <FileName>temperature_test.h</FileName>
               <FileType>5</FileType>
-              <FilePath>..\BSP\temperature\temperature_test.h</FilePath>
+              <FilePath>..\BSP\test\temperature_test.h</FilePath>
+            </File>
+            <File>
+              <FileName>uart_test.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\BSP\test\uart_test.c</FilePath>
+            </File>
+            <File>
+              <FileName>uart_test.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\BSP\test\uart_test.h</FilePath>
             </File>
           </Files>
         </Group>
