@@ -5,31 +5,27 @@
 #include "uart_test.h"
 #include <string.h>
 
-#define DMA_RX_BUFFER_SIZE 256  /*!< DMA 测试缓冲区大小 */
+#define DMA_RX_BUFFER_SIZE 256
 #define SEP "========================"
 
-static uint8_t g_dmaRxBuffer[DMA_RX_BUFFER_SIZE];  /*!< DMA RX 测试缓冲区 */
+static uint8_t g_dmaRxBuffer[DMA_RX_BUFFER_SIZE];
 
-/*! @brief RX 中断测试回调 */
 static void testRxCallback(uint8_t data, void *arg)
 {
     UART_printf((UART_Regs*)arg, "  [RX] 0x%02X ('%c')\r\n", data,
                 (data >= ' ' && data <= '~') ? data : '.');
 }
 
-/*! @brief TX 完成测试回调 */
 static void testTxCallback(void *arg)
 {
     UART_printf((UART_Regs*)arg, "  [TX] done\r\n");
 }
 
-/*! @brief DMA RX 测试回调 */
 static void testDmaRxCallback(uint32_t avail, void *arg)
 {
     UART_printf((UART_Regs*)arg, "  [DMA RX] %lu bytes\r\n", avail);
 }
 
-/*! @brief 轮询 API 测试 */
 void UART_TEST_runPollingTests(UART_Regs *uart)
 {
     UART_Error st;
@@ -72,7 +68,6 @@ void UART_TEST_runPollingTests(UART_Regs *uart)
     UART_setBaudRate(uart, 115200);
 }
 
-/*! @brief DMA API 测试 */
 void UART_TEST_runDmaTests(UART_Regs *uart)
 {
     UART_Error st;
@@ -107,7 +102,6 @@ void UART_TEST_runDmaTests(UART_Regs *uart)
                 UART_DMA_isRxOverflowed(uart) ? "FAIL" : "PASS");
 }
 
-/*! @brief 运行全部测试 */
 void UART_TEST_runAll(UART_Regs *uart)
 {
     UART_printf(uart, "\r\n%s\r\nUART LIBRARY TEST\r\n%s\r\n", SEP, SEP);

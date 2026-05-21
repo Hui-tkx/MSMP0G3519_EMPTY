@@ -1,89 +1,54 @@
 /**
  * @file test.h
- * @brief 板级测试库
+ * @brief 板级测试库 — 统一测试入口
  *
- * ============================================================================
- * 简介
- * ============================================================================
- * 集成所有外设库的测试功能，方便快速验证硬件是否正常工作。
- * 测试结果通过 UART 串口输出。
+ * 所有外设测试通过此库统一调用，方便在 main 中快速验证硬件。
  *
- * ============================================================================
- * 测试项目
- * ============================================================================
- * - ADC 测试 (模数转换)
- * - DAC 测试 (数模转换)
- * - UART 测试 (串口通信)
- * - RingBuffer 测试 (通用环形缓冲区)
- * - UART RingBuffer 测试 (UART专用环形缓冲区)
- *
- * ============================================================================
- * 使用方法
- * ============================================================================
+ * 使用示例:
  * @code
  * #include "bsp.h"
  *
- * int main(void)
- * {
+ * int main(void) {
  *     SYSCFG_DL_init();
  *     UART_init(UART_0_INST);
  *     ADC_init();
  *     DAC_init();
  *
- *     // 运行所有测试
- *     TEST_runAll(UART_0_INST);
+ *     TEST_all(UART_0_INST);       // 跑全部测试
+ *     // 或单项测试:
+ *     // TEST_adc(UART_0_INST);
+ *     // TEST_dac(UART_0_INST);
+ *     // TEST_temperature(UART_0_INST);
  *
  *     while (1) { }
  * }
  * @endcode
  *
- * ============================================================================
- * API 函数列表
- * ============================================================================
- * | 函数名          | 功能                     |
- * |----------------|--------------------------|
- * | TEST_runAll    | 运行所有测试             |
- * | TEST_runADC    | 运行 ADC 测试            |
- * | TEST_runDAC    | 运行 DAC 测试            |
- * | TEST_runUART   | 运行 UART 测试          |
- * | TEST_runRingBuffer | 运行 RingBuffer 测试 |
+ * API 列表:
+ * | 函数                | 功能                   |
+ * |-------------------|------------------------|
+ * | TEST_all          | 运行所有测试           |
+ * | TEST_adc          | 运行 ADC 测试          |
+ * | TEST_dac          | 运行 DAC 测试          |
+ * | TEST_uart         | 运行 UART 测试         |
+ * | TEST_temperature  | 运行温度传感器测试     |
+ * | TEST_ringbuffer   | 运行 RingBuffer 测试   |
+ * | TEST_uart_rb      | 运行 UART RingBuffer 测试 |
  */
 
 #ifndef _TEST_H_
 #define _TEST_H_
 
 #include "ti_msp_dl_config.h"
-#include "bsp.h"
-/**
- * @brief 运行所有测试
- *
- * @param uart UART 实例指针，用于输出测试结果
- */
-void TEST_runAll(UART_Regs *uart);
+#include "uart.h"
 
-/**
- * @brief 运行 ADC 测试
- */
-void TEST_runADC(UART_Regs *uart);
-
-/**
- * @brief 运行 DAC 测试
- */
-void TEST_runDAC(UART_Regs *uart);
-
-/**
- * @brief 运行 UART 测试
- */
-void TEST_runUART(UART_Regs *uart);
-
-/**
- * @brief 运行 RingBuffer 测试
- */
-void TEST_runRingBuffer(UART_Regs *uart);
-
-/**
- * @brief 运行 UART RingBuffer 测试
- */
-void TEST_runUARTRingBuffer(UART_Regs *uart);
+/* === 统一测试入口 === */
+void TEST_all(UART_Regs *uart);             /*!< 运行所有测试 */
+void TEST_adc(UART_Regs *uart);             /*!< 运行 ADC 测试 */
+void TEST_dac(UART_Regs *uart);             /*!< 运行 DAC 测试 */
+void TEST_uart(UART_Regs *uart);            /*!< 运行 UART 测试 */
+void TEST_temperature(UART_Regs *uart);     /*!< 运行温度传感器测试 */
+void TEST_ringbuffer(UART_Regs *uart);      /*!< 运行 RingBuffer 测试 */
+void TEST_uart_rb(UART_Regs *uart);         /*!< 运行 UART RingBuffer 测试 */
 
 #endif

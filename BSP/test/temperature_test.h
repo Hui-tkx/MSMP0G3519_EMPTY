@@ -7,6 +7,6 @@
 
 #include "uart.h"
 
-void TEMP_TEST_runAll(UART_Regs *uart);  /*!< 运行全部温度测试 */
+void TEMP_TEST_runAll(UART_Regs *uart);
 
 #endif

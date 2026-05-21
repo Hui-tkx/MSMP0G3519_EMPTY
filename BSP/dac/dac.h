@@ -1,6 +1,11 @@
 /**
  * @file dac.h
- * @brief DAC 数模转换器驱动库 (码值/电压输出 + 软件波形)
+ * @brief DAC 数模转换器驱动库
+ *
+ * 方案: DMA + 双缓冲, 不用 FIFO
+ *   - TIMER_8K Zero事件 → FPUB_0 → 事件通道1 → DMA Generic SUB0 → DMA CH4
+ *   - DMA CH4: REPEAT_BLOCK, src=INC, dst=UNCHANGED → 直接写 DAC0->DATA0
+ *   - 双缓冲 ping-pong: 播放 bufA 时 bufB 可被填充新波形
  */
 #ifndef _DAC_H_
 #define _DAC_H_
@@ -10,31 +15,48 @@
 #include <stdbool.h>
 
 /* ========== 硬件常量 ========== */
-#define DAC_INST            DAC0            /*!< DAC 外设实例            */
-#define DAC_RESOLUTION      12U             /*!< 分辨率 12-bit           */
-#define DAC_MAX_VALUE       4095U           /*!< 满量程值                */
-#define DAC_REF_VOLTAGE     3.3f            /*!< 参考电压 3.3V           */
+#define DAC_INST            DAC0
+#define DAC_RESOLUTION      12U
+#define DAC_MAX_VALUE       4095U
+#define DAC_REF_VOLTAGE     3.3f
 
-/* ========== API 函数声明 ========== */
+#define DAC_SAMPLE_RATE_HZ  8000UL
+#define DAC_WAVE_BUF_SIZE   256
 
-void        DAC_init(void);                                         /*!< 初始化 DAC 运行态 */
-void        DAC_setValue(uint16_t value);                           /*!< 写码值 (0~4095, 自动截断) */
-void        DAC_setVoltage(float voltage);                          /*!< 写电压 (V, 自动截断) */
-void        DAC_enableOutput(void);                                 /*!< 使能输出引脚 */
-void        DAC_disableOutput(void);                                /*!< 禁用输出引脚 */
-bool        DAC_isOutputEnabled(void);                              /*!< 查询输出是否使能 */
+/* ========== API ========== */
 
-/* --- FIFO 模式 (SysConfig 已配置, 运行时按需调用) --- */
-void        DAC_enableFIFO(DL_DAC12_FIFO_THRESHOLD threshold);      /*!< 启用 FIFO + 设阈值 */
-void        DAC_disableFIFO(void);                                  /*!< 禁用 FIFO */
-void        DAC_enableSampleTimer(DL_DAC12_SAMPLES_PER_SECOND rate);/*!< 启用采样定时器 */
-void        DAC_disableSampleTimer(void);                           /*!< 禁用采样定时器 */
-uint32_t    DAC_fillFIFO(const uint16_t *buffer, uint32_t count);   /*!< 批量填充 FIFO, 返回写入数 */
+void DAC_init(void);
+void DAC_setValue(uint16_t value);
+void DAC_setVoltage(float voltage);
+void DAC_enableOutput(void);
+void DAC_disableOutput(void);
+bool DAC_isOutputEnabled(void);
 
-/* --- 软件波形生成 (阻塞) --- */
-void DAC_generateTriangleWave(uint16_t minVal, uint16_t maxVal,     /*!< 三角波 */
+/* DMA + 双缓冲波形播放 */
+void DAC_waveStart(const uint16_t *buf, uint32_t len);
+void DAC_waveStop(void);
+bool DAC_waveIsPlaying(void);
+
+/* 波形表构建 */
+typedef enum {
+    DAC_WAVE_SINE     = 0,
+    DAC_WAVE_SQUARE   = 1,
+    DAC_WAVE_TRIANGLE = 2,
+    DAC_WAVE_SAWTOOTH = 3,
+} DAC_WaveType;
+
+uint32_t DAC_buildWaveform(uint16_t *buf, uint32_t len,
+                           DAC_WaveType type,
+                           uint16_t offset, uint16_t amplitude);
+
+void DAC_playWaveform(uint16_t *buf, uint32_t len,
+                      DAC_WaveType type,
+                      uint16_t offset, uint16_t amplitude);
+
+/* 软件波形 (阻塞, 调试用) */
+void DAC_generateTriangleWave(uint16_t minVal, uint16_t maxVal,
                               uint16_t step, uint32_t delayMs);
-void DAC_generateSineWave(uint16_t amplitude, uint16_t offset,      /*!< 正弦波 */
+void DAC_generateSineWave(uint16_t amplitude, uint16_t offset,
                           uint32_t frequency, uint32_t durationMs);
 
 #endif

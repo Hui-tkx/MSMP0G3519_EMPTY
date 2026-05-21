@@ -8,10 +8,8 @@
 
 #define SEP "=========================="
 
-/*! @brief UART 调试打印缓冲区 (由 TEMP_setDebugPrint 注册) */
 static UART_Regs *g_uart = NULL;
 
-/*! @brief 调试打印回调: 将调试信息通过 UART 输出 */
 static void dbgPrint(const char *msg)
 {
     if (g_uart) {
@@ -31,22 +29,18 @@ void TEMP_TEST_runAll(UART_Regs *uart)
     UART_printf(uart, "TEMPERATURE SENSOR TEST\r\n");
     UART_printf(uart, "%s\r\n", SEP);
 
-    /* 注册调试打印 */
     TEMP_setDebugPrint(dbgPrint);
     UART_printf(uart, "\r\n[0] Debug print registered, detailed log follows:\r\n");
 
-    /* --- 1. 初始化 --- */
     UART_printf(uart, "\r\n[1] TEMP_init()...\r\n");
     TEMP_init();
     UART_printf(uart, "[1] TEMP_init() OK\r\n");
 
-    /* --- 2. 读校准值 --- */
     uint32_t calCode = TEMP_getCalCode();
     UART_printf(uart, "\r\n[2] Calibration ADC code: %lu\r\n", calCode);
     UART_printf(uart, "    Calibration temp: %d.%d C\r\n",
                 TEMP_getCalibration_x10() / 10, TEMP_getCalibration_x10() % 10);
 
-    /* --- 3. 连续读 10 次 --- */
     UART_printf(uart, "\r\n[3] Reading 10 samples:\r\n");
     for (int i = 0; i < 10; i++) {
         val_x10 = TEMP_read_x10();
@@ -62,14 +56,12 @@ void TEMP_TEST_runAll(UART_Regs *uart)
         delay_ms(200);
     }
 
-    /* --- 4. 统计 --- */
     UART_printf(uart, "\r\n[4] Statistics:\r\n");
     UART_printf(uart, "  Min:  %d.%d C\r\n", min_x10 / 10, min_x10 % 10);
     UART_printf(uart, "  Max:  %d.%d C\r\n", max_x10 / 10, max_x10 % 10);
     UART_printf(uart, "  Avg:  %d.%d C\r\n",
                 (sum_x10 / 10) / 10, (sum_x10 / 10) % 10);
 
-    /* --- 5. 浮点版 --- */
     float fval = TEMP_read();
     UART_printf(uart, "\r\n[5] TEMP_read() (float): %.2f C\r\n", fval);
 

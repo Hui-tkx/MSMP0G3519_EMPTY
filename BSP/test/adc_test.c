@@ -1,34 +1,22 @@
 /**
  * @file adc_test.c
  * @brief ADC 库测试实现 (硬件平均 + 稳定性)
- *
- * 测试项:
- *   基础 API:  init / read / readVoltage / getLastStatus
- *   硬件平均:  readAverage 多组采样对比
- *   稳定性:    连续 10 次读取统计极差
- *   错误处理:  无效通道测试
  */
 #include "adc_test.h"
 #include "delay.h"
 
-/*! @brief 硬件平均测试采样次数 (2/8/32/64) */
 #define ADC_TEST_HWAVG_COUNTS  {2, 8, 32, 64}
 
-/*! @brief 打印带标题的分隔线 */
 static void printSeparator(UART_Regs *uart, const char *title)
 {
-    UART_printf(uart, "\r\n%s\r\n", ADC_TEST_SEPARATOR);
-    UART_printf(uart, "%s\r\n", title);
-    UART_printf(uart, "%s\r\n", ADC_TEST_SEPARATOR);
+    UART_printf(uart, "\r\n%s\r\n%s\r\n%s\r\n", ADC_TEST_SEPARATOR, title, ADC_TEST_SEPARATOR);
 }
 
-/*! @brief 打印测试小标题 */
 static void printTestHeader(UART_Regs *uart, const char *testName)
 {
     UART_printf(uart, "\r\n--- %s ---\r\n", testName);
 }
 
-/*! @brief 基础 API 测试 */
 void ADC_TEST_runBasicTests(UART_Regs *uart)
 {
     printSeparator(uart, "ADC BASIC API TESTS");
@@ -56,7 +44,6 @@ void ADC_TEST_runBasicTests(UART_Regs *uart)
     UART_printf(uart, "Status: %s | PASS\r\n", s);
 }
 
-/*! @brief 硬件平均测试 (多组对比) */
 void ADC_TEST_runAverageTests(UART_Regs *uart)
 {
     printSeparator(uart, "ADC HARDWARE AVERAGE TESTS");
@@ -74,7 +61,6 @@ void ADC_TEST_runAverageTests(UART_Regs *uart)
         prev = val;
     }
 
-    /* 稳定性测试: 连续 10 次单次读取 */
     printTestHeader(uart, "[6] Stability (10x single read)");
     uint32_t sum = 0, minV = 0xFFFF, maxV = 0;
     for (int i = 0; i < 10; i++) {
@@ -89,7 +75,6 @@ void ADC_TEST_runAverageTests(UART_Regs *uart)
         sum / 10, minV, maxV, range,
         (range < 10) ? "EXCELLENT" : (range < 50) ? "GOOD" : (range < 100) ? "FAIR" : "NOISY");
 
-    /* 错误处理测试 */
     printTestHeader(uart, "[7] Error handling (invalid channel)");
     uint16_t bad = ADC_read(ADC_CHANNEL_1);
     ADC_Status es = ADC_getLastStatus();
@@ -98,7 +83,6 @@ void ADC_TEST_runAverageTests(UART_Regs *uart)
         (es == ADC_STATUS_INVALID_CHANNEL) ? "PASS" : "FAIL");
 }
 
-/*! @brief 运行全部测试 */
 void ADC_TEST_runAll(UART_Regs *uart)
 {
     UART_printf(uart, "\r\n%s\r\nADC LIBRARY TEST (HW AVG + POLLING)\r\n%s\r\n",
