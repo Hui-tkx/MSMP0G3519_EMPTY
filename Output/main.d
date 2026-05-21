@@ -70,4 +70,4 @@
   ..\BSP\flash\flash.h ..\BSP\buzzer\buzzer.h ..\BSP\w25q64\spi.h \
   ..\BSP\ringbuffer\ringbuffer.h ..\BSP\ringbuffer\uart_ringbuffer.h \
   ..\BSP\w25q64\w25q64.h ..\BSP\temperature\temperature.h \
-  ..\BSP\test\test.h ..\BSP\temperature\temperature_test.h
+  ..\BSP\test\test.h

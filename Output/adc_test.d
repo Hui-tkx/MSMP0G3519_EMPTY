@@ -1,4 +1,4 @@
-../output/adc_test.o: ..\BSP\adc\adc_test.c ..\BSP\adc\adc_test.h \
+../output/adc_test.o: ..\BSP\test\adc_test.c ..\BSP\test\adc_test.h \
   ..\BSP\adc\adc.h ..\User\ti_msp_dl_config.h \
   ..\Source\ti\devices\msp\msp.h ..\Source\ti\devices\DeviceFamily.h \
   ..\Source\ti\devices\msp\m0p\mspm0g351x.h \

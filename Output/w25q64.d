@@ -1,5 +1,5 @@
-../output/w25q64.o: ..\BSP\W25Q64\w25q64.c ..\BSP\W25Q64\w25q64.h \
-  ..\BSP\bsp.h ..\Source\ti\devices\msp\msp.h \
+../output/w25q64.o: ..\BSP\w25q64\w25q64.c ..\BSP\w25q64\w25q64.h \
+  ..\User\ti_msp_dl_config.h ..\Source\ti\devices\msp\msp.h \
   ..\Source\ti\devices\DeviceFamily.h \
   ..\Source\ti\devices\msp\m0p\mspm0g351x.h \
   ..\Source\third_party\CMSIS\Core\Include\core_cm0plus.h \
@@ -64,10 +64,4 @@
   ..\Source\ti\driverlib\dl_unicommuart.h \
   ..\Source\ti\driverlib\dl_vref.h ..\Source\ti\driverlib\dl_wwdt.h \
   ..\Source\ti\driverlib\m0p\dl_interrupt.h \
-  ..\Source\ti\driverlib\m0p\dl_systick.h ..\User\ti_msp_dl_config.h \
-  ..\BSP\LED\led.h ..\BSP\UART0\uart0.h \
-  ..\BSP\TimerG6_PWM_RGB\timerG6_pwm_rgb.h ..\BSP\KEY\key.h \
-  ..\BSP\KeyBoard\keyboard.h ..\BSP\SPI0_OLED\spi0_oled.h \
-  ..\BSP\TimerA1\TimerA1.h ..\BSP\SPI1\spi1.h ..\BSP\IMU\IMU\IMU.h \
-  ..\BSP\ADC0\adc0.h ..\BSP\MYI2C1\myi2c.h \
-  ..\BSP\TIMERG0_LED_BUZZER\timerG0_led_buzzer.h
+  ..\Source\ti\driverlib\m0p\dl_systick.h ..\BSP\w25q64\spi.h

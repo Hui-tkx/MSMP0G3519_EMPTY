@@ -1,5 +1,5 @@
-../output/temperature_test.o: ..\BSP\temperature\temperature_test.c \
-  ..\BSP\temperature\temperature_test.h ..\BSP\uart\uart.h \
+../output/temperature_test.o: ..\BSP\test\temperature_test.c \
+  ..\BSP\test\temperature_test.h ..\BSP\uart\uart.h \
   ..\User\ti_msp_dl_config.h ..\Source\ti\devices\msp\msp.h \
   ..\Source\ti\devices\DeviceFamily.h \
   ..\Source\ti\devices\msp\m0p\mspm0g351x.h \

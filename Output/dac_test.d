@@ -1,4 +1,4 @@
-../output/dac_test.o: ..\BSP\dac\dac_test.c ..\BSP\dac\dac_test.h \
+../output/dac_test.o: ..\BSP\test\dac_test.c ..\BSP\test\dac_test.h \
   ..\BSP\dac\dac.h ..\User\ti_msp_dl_config.h \
   ..\Source\ti\devices\msp\msp.h ..\Source\ti\devices\DeviceFamily.h \
   ..\Source\ti\devices\msp\m0p\mspm0g351x.h \

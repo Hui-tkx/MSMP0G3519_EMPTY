@@ -268,7 +268,6 @@ TIMER1.event2PublisherChannel = 2;
 TIMER1.timerMode              = "PERIODIC_UP";
 TIMER1.timerStartTimer        = true;
 TIMER1.timerPeriod            = "0.125ms";
-TIMER1.subscriberPort         = "FSUB0";
 
 TRNG.clockDivider = "DL_TRNG_CLOCK_DIVIDE_8";
 

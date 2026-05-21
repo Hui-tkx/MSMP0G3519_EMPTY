@@ -64,11 +64,8 @@
   ..\Source\ti\driverlib\dl_unicommuart.h \
   ..\Source\ti\driverlib\dl_vref.h ..\Source\ti\driverlib\dl_wwdt.h \
   ..\Source\ti\driverlib\m0p\dl_interrupt.h \
-  ..\Source\ti\driverlib\m0p\dl_systick.h ..\BSP\bsp.h \
-  ..\BSP\oled\oled_spi.h ..\BSP\delay\delay.h ..\BSP\led\led.h \
-  ..\BSP\oled\oledfont.h ..\BSP\key\key.h ..\BSP\uart\uart.h \
-  ..\BSP\adc\adc.h ..\BSP\dac\dac.h ..\BSP\pwm\pwm.h \
-  ..\BSP\flash\flash.h ..\BSP\buzzer\buzzer.h ..\BSP\w25q64\spi.h \
-  ..\BSP\ringbuffer\ringbuffer.h ..\BSP\ringbuffer\uart_ringbuffer.h \
-  ..\BSP\w25q64\w25q64.h ..\BSP\temperature\temperature.h \
-  ..\BSP\adc\adc_test.h ..\BSP\dac\dac_test.h ..\BSP\uart\uart_test.h
+  ..\Source\ti\driverlib\m0p\dl_systick.h ..\BSP\uart\uart.h \
+  ..\BSP\test\adc_test.h ..\BSP\adc\adc.h ..\BSP\test\dac_test.h \
+  ..\BSP\dac\dac.h ..\BSP\test\uart_test.h \
+  ..\BSP\test\temperature_test.h ..\BSP\ringbuffer\ringbuffer.h \
+  ..\BSP\ringbuffer\uart_ringbuffer.h ..\BSP\delay\delay.h

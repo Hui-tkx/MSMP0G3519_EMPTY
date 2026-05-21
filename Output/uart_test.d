@@ -1,7 +1,6 @@
-../output/uart_test.o: ..\..\empty\BSP\uart\uart_test.c \
-  ..\..\empty\BSP\uart\uart_test.h ..\..\empty\BSP\uart\uart.h \
-  ..\User\ti_msp_dl_config.h ..\Source\ti\devices\msp\msp.h \
-  ..\Source\ti\devices\DeviceFamily.h \
+../output/uart_test.o: ..\BSP\test\uart_test.c ..\BSP\test\uart_test.h \
+  ..\BSP\uart\uart.h ..\User\ti_msp_dl_config.h \
+  ..\Source\ti\devices\msp\msp.h ..\Source\ti\devices\DeviceFamily.h \
   ..\Source\ti\devices\msp\m0p\mspm0g351x.h \
   ..\Source\third_party\CMSIS\Core\Include\core_cm0plus.h \
   ..\Source\ti\devices\msp\peripherals\hw_adc12.h \
